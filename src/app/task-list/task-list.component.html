@@ -1,0 +1,28 @@
+<div class="container box">
+    <h2 class="text-center pt-5">
+       <u>Lista de Tareas:</u>
+    </h2>
+
+    <form class="mt-3 mb-3" [formGroup]="taskForm">
+        <label>Nueva tarea:</label>
+        <div class="input-group w-50">
+            <input type="text" class="form-control" formControlName="task" placeholder="Hacer las compras..." [class.is-invalid]="taskForm.get('task')?.invalid && taskForm.get('task')?.dirty" required>
+            <div class="input-group-append">
+                <button class="btn btn-primary ml-5" (click)="agregar()">Agregar</button>        
+            </div>
+        </div>
+    </form>
+    
+    <div *ngIf="taskList.length > 0" class="box-task-list pt-3">
+        <div class="task-list m-2" *ngFor="let task of taskList; let i = index">
+            <input type="checkbox" [checked]="task.checked" class="form-check-input hand" id="i" (click)="checked(i)">
+            <span>{{ i + 1 }}- 
+                <span [ngClass]="task.checked ? 'done' : ''">{{task.nombre}}</span>
+            </span>
+            <button class="btn btn-danger" (click)="remover(i)">
+                <i class="fa-solid fa-trash text-center"></i>
+            </button>
+        </div>
+    </div>
+
+</div>
